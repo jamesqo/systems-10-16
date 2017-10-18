@@ -12,26 +12,44 @@ song_node* insert_front(song_node* list, char* name, char* artist) {
   song_node *new = (song_node *)malloc(sizeof(song_node));
   strcpy(new->name, name);
   strcpy(new->artist, artist);
+  new->next = list;
   return new;
 }
 
+//return front of list
 song_node* insert_in_order(song_node* list, char* name, char* artist) {
+  song_node *new = insert_front(NULL, name, artist);
 
+  song_node *last = NULL;
+  song_node *node = list;
+  while (node && songcmp(node, new) < 0) {
+    last = node;
+    node = node->next;
+  }
+  //node points to node after where new should be
+  
+  //last is still null -> new is the front
+  if (!last) {
+    new->next = list;
+    return new;
+  }
+  new->next = node;
+  last->next = new;
+  return list;
 }
 
-void print_list(song_node* list){
+void print_list(song_node* list) {
   while (list) {
     print_node(list);
     list = list->next;
   }
-  printf("NULL\n");
 }
 
-song_node* search_for_name(song_node* list, char* name){
-  
+song_node* search_for_song(song_node* list, char* name, char* artist) {
+
 }
 
-song_node* search_for_artist(song_node* list, char* artist){
+song_node* search_for_artist(song_node* list, char* artist) {
   while (list) {
     if (strcmp(list->artist, artist) == 0)
       return list;
@@ -41,14 +59,22 @@ song_node* search_for_artist(song_node* list, char* artist){
   return NULL;
 }
 
-song_node* random_song(song_node* list){
+song_node* random_song(song_node* list) {
   
 }
 
-song_node* remove_node(song_node* list, song_node* to_remove){
+song_node* remove_node(song_node* list, song_node* to_remove) {
   
 }
 
-song_node* free_list(song_node* list){
+song_node* free_list(song_node* list) {
   
+}
+
+int songcmp(song_node* node1, song_node* node2) {
+  //compare artist, then compare name
+  int artistcmp = strcmp(node1->artist, node2->artist);
+  if (artistcmp)
+    return artistcmp;
+  return strcmp(node1->name, node2->name);
 }
