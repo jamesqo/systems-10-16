@@ -1,15 +1,10 @@
-#include <stdio.h>
-
 typedef struct song_node { 
   char name[256];
   char artist[256];
   struct song_node *next;
 } song_node;
 
-void print_node(song_node *node) {
-  printf("name: %s\nartist: %s\n\n", node->name, node->artist);
-}
-
+void print_node(song_node *node);
 
 song_node* insert_front(song_node* list, char* name, char* artist);
 

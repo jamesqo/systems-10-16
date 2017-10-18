@@ -4,6 +4,10 @@
 
 #include "linked_list.h"
 
+void print_node(song_node *node) {
+  printf("name: %s\nartist: %s\n\n", node->name, node->artist);
+}
+
 song_node* insert_front(song_node* list, char* name, char* artist) {
   song_node *new = (song_node *)malloc(sizeof(song_node));
   strcpy(new->name, name);
