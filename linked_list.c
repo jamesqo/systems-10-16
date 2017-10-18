@@ -46,7 +46,13 @@ void print_list(song_node* list) {
 }
 
 song_node* search_for_song(song_node* list, char* name, char* artist) {
-
+  while (list) {
+    if (strcmp(list->name, name) == 0 &&
+	strcmp(list->artist, artist) == 0)
+      return list;
+    list = list->next;
+  }
+  return NULL;
 }
 
 song_node* search_for_artist(song_node* list, char* artist) {
@@ -60,6 +66,7 @@ song_node* search_for_artist(song_node* list, char* artist) {
 }
 
 song_node* random_song(song_node* list) {
+  //assume srand called
   
 }
 
@@ -77,4 +84,8 @@ int songcmp(song_node* node1, song_node* node2) {
   if (artistcmp)
     return artistcmp;
   return strcmp(node1->name, node2->name);
+}
+
+int length(song_node *list) {
+
 }

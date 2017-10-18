@@ -25,3 +25,5 @@ song_node* free_list(song_node* list);
 
 //helpers
 int songcmp(song_node* node1, song_node* node2);
+
+int length(song_node *list);
