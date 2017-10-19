@@ -1,6 +1,7 @@
 #include "music_lib.h"
 
 #include <stddef.h>
+#include <stdlib.h>
 
 song_node* table[26];
 
@@ -27,17 +28,9 @@ void music_lib_add_song(char* name, char* artist) {
   set_entries(artist[0], insert_in_order(entries, name, artist));
 }
 
-song_node* music_lib_search_for_song(char* name) {
-  char letter;
-  for (letter = 'a'; letter <= 'z'; letter++) {
-    song_node* entries = get_entries(letter);
-    song_node* result = search_for_name(entries, name);
-    if (result != NULL) {
-      return result;
-    }
-  }
-
-  return NULL;
+song_node* music_lib_search_for_song(char* name, char* artist) {
+  song_node* entries = get_entries(artist[0]);
+  return search_for_song(entries, name, artist);
 }
 
 song_node* music_lib_search_for_artist(char* artist) {
@@ -77,7 +70,7 @@ void music_lib_shuffle(size_t number_to_print) {
 
 void music_lib_delete_song(char* name, char* artist) {
   song_node* entries = get_entries(artist[0]);
-  set_entries(artist[0], remove_node(entries, name, artist));
+  set_entries(artist[0], remove_song(entries, name, artist));
 }
 
 void music_lib_delete_whole_library() {
