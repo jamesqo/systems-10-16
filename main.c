@@ -4,9 +4,7 @@
 
 #include "linked_list.h"
 
-int main() {
-  srand(time(NULL));
-  
+void linked_list_tests() {
   printf("LINKED LIST TESTS\n\n");
 
   //insert_front, print_node
@@ -86,7 +84,13 @@ int main() {
   printf("%d\n", length(n1));
   n2->next = n3;
   printf("%d\n", length(n1));
+  
+  free_list(n1);
+}
+int main() {
+  srand(time(NULL));
 
+  linked_list_tests();
   
   return 0;
 }
