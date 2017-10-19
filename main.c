@@ -87,10 +87,38 @@ void linked_list_tests() {
   
   free_list(n1);
 }
+
+void music_lib_tests() {
+  music_lib_add_song("mozArt", "classical Music title");
+  music_lib_add_song("taylor sWift", "blAnk space");
+  music_lib_add_song("Maroon 5", "suGar");
+
+  song_node* sfs_result = music_lib_search_for_song("Mozart", "CLASSICAL MUSIC TITLE");
+  print_node(sfs_result);
+
+  song_node* sfa_result = music_lib_search_for_artist("mOzart");
+  print_node(sfa_result);
+
+  music_lib_print_entries_with_first_letter('M');
+  music_lib_print_entries_with_first_letter('T');
+
+  music_lib_print_songs_of_artist("MOZART");
+  music_lib_print_songs_of_artist("TAYLOR SWIFT");
+  music_lib_print_songs_of_artist("MAROON 5");
+
+  music_lib_print_whole_library();
+
+  music_lib_shuffle(1);
+  music_lib_shuffle(1);
+  music_lib_shuffle(2);
+  
+}
+
 int main() {
   srand(time(NULL));
 
   linked_list_tests();
+  music_lib_tests();
   
   return 0;
 }
