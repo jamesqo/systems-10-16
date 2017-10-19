@@ -12,8 +12,8 @@ void music_lib_print_songs_of_artist(char* artist);
 
 void music_lib_print_whole_library();
 
-void music_lib_shuffle();
+void music_lib_shuffle(size_t number_to_print);
 
-void music_lib_delete_song(char* name);
+void music_lib_delete_song(char* name, char* artist);
 
 void music_lib_delete_whole_library();
