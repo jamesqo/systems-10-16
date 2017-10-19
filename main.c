@@ -18,7 +18,7 @@ int main() {
   list = insert_in_order(list, "Cars", "Alice");
   list = insert_in_order(list, "CL", "Steele");
   list = insert_in_order(list, "Python", "Rossum");
-  list = insert_in_order(list, "C", "Bjorne");
+  list = insert_in_order(list, "C++", "Bjorne");
   printf("print_list:\n");
   print_list(list);
 
@@ -69,14 +69,14 @@ int main() {
   printf("%p\n\n", list);
   
   //songcmp
-  song_node *n1 = insert_front(NULL, "C", "Bjorne");
-  song_node *n2 = insert_front(NULL, "D", "Bjorne");
-  song_node *n3 = insert_front(NULL, "A", "Google");
+  song_node *n1 = insert_front(NULL, "C++", "Bjorne");
+  song_node *n2 = insert_front(NULL, "C*", "Steel");
+  song_node *n3 = insert_front(NULL, "CL", "Steel");
   printf("songcmp:\n");
   printf("%d\n", songcmp(n1, n2));
   printf("%d\n", songcmp(n2, n1));
-  printf("%d\n", songcmp(n1, n3));
-  printf("%d\n\n", songcmp(n3, n1));
+  printf("%d\n", songcmp(n2, n3));
+  printf("%d\n\n", songcmp(n3, n2));
 
   //length
   printf("length:\n");
