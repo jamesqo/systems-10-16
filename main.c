@@ -16,8 +16,9 @@ int main() {
 
   //insert_in_order, print_list
   list = insert_in_order(list, "Cars", "Alice");
-  list = insert_in_order(list, "SBCL", "Steele");
+  list = insert_in_order(list, "CL", "Steele");
   list = insert_in_order(list, "Python", "Rossum");
+  list = insert_in_order(list, "C", "Bjorne");
   printf("print_list:\n");
   print_list(list);
 
@@ -45,7 +46,27 @@ int main() {
     printf("Song not found\n\n");
   }
 
-  
+  //random_song
+  printf("random_song:\n");
+  print_node(random_song(list));
+  print_node(random_song(list));
+  print_node(random_song(list));
+
+  //remove_song
+  printf("remove_song:\n");
+  printf("before:\n");
+  print_list(list);
+  list = remove_song(list, "Cars", "Alice");
+  printf("after:\n");
+  print_list(list);
+  list = remove_song(list, "Dogs", "Alice"); //no song to remove
+  printf("after:\n");
+  print_list(list);
+
+  //free_list
+  printf("free_list:\n");
+  list = free_list(list);
+  printf("%p\n\n", list);
   
   //songcmp
   song_node *n1 = insert_front(NULL, "C", "Bjorne");
@@ -55,7 +76,16 @@ int main() {
   printf("%d\n", songcmp(n1, n2));
   printf("%d\n", songcmp(n2, n1));
   printf("%d\n", songcmp(n1, n3));
-  printf("%d\n", songcmp(n3, n1));
+  printf("%d\n\n", songcmp(n3, n1));
+
+  //length
+  printf("length:\n");
+  printf("%d\n", length(NULL));
+  printf("%d\n", length(n1));
+  n1->next = n2;
+  printf("%d\n", length(n1));
+  n2->next = n3;
+  printf("%d\n", length(n1));
 
   
   return 0;

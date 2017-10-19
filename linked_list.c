@@ -48,7 +48,7 @@ void print_list(song_node* list) {
 song_node* search_for_song(song_node* list, char* name, char* artist) {
   while (list) {
     if (strcmp(list->name, name) == 0 &&
-	strcmp(list->artist, artist) == 0)
+        strcmp(list->artist, artist) == 0)
       return list;
     list = list->next;
   }
@@ -67,15 +67,48 @@ song_node* search_for_artist(song_node* list, char* artist) {
 
 song_node* random_song(song_node* list) {
   //assume srand called
-  
+  int num = rand() % length(list);
+  while (list) {
+    if (num == 0)
+      return list;
+    num--;
+    list = list->next;
+  }
+  //list is null in the first place
+  return NULL;
 }
 
-song_node* remove_node(song_node* list, song_node* to_remove) {
-  
+//return front of list
+song_node* remove_song(song_node* list, char* name, char* artist) {
+  song_node *last = NULL;
+  song_node *node = list;
+  while (node) {
+    if (strcmp(node->name, name) == 0 &&
+        strcmp(node->artist, artist) == 0) {
+      //song to remove is the front of list?
+      if (last == NULL)
+        list = list->next;
+      else
+        last->next = node->next;
+      //free node too
+      free(node);
+      return list;
+    }
+    last = node;
+    node = node->next;
+  }
+  //couldn't find it...
+  return list;
 }
 
+//return pointer to beginning of list (null)
 song_node* free_list(song_node* list) {
-  
+  while (list) {
+    song_node *next = list->next;
+    free(list);
+    list = next;
+  }
+  return NULL;
 }
 
 int songcmp(song_node* node1, song_node* node2) {
@@ -87,5 +120,10 @@ int songcmp(song_node* node1, song_node* node2) {
 }
 
 int length(song_node *list) {
-
+  int len = 0;
+  while (list) {
+    len++;
+    list = list->next;
+  }
+  return len;
 }
