@@ -7,8 +7,6 @@
 
 song_node* table[26];
 
-// TODO: Convert strings to lowercase
-
 song_node* get_entries(char letter) {
   return table[tolower(letter) - 'a'];
 }
