@@ -125,6 +125,16 @@ void music_lib_tests() {
 
   music_lib_shuffle(3);
   music_lib_shuffle(3);
+
+  printf("Testing delete_song:\n");
+  music_lib_delete_song("clAssical music title", "moZart");
+  printf("After delete_song, this is the whole library:\n");
+  music_lib_print_whole_library();
+
+  printf("Testing delete_whole_library:\n");
+  music_lib_delete_whole_library();
+  printf("After delete_whole_library, this is the whole library:\n");
+  music_lib_print_whole_library();
 }
 
 int main() {
