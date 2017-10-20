@@ -5,6 +5,11 @@
 #include "linked_list.h"
 
 void print_node(song_node *node) {
+  if (!node) {
+    printf("null node\n\n");
+    return;
+  }
+
   printf("name: %s\nartist: %s\n\n", node->name, node->artist);
 }
 
@@ -66,6 +71,10 @@ song_node* search_for_artist(song_node* list, char* artist) {
 }
 
 song_node* random_song(song_node* list) {
+  if (!list) {
+    return NULL;
+  }
+
   //assume srand called
   int num = rand() % length(list);
   while (list) {

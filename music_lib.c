@@ -1,7 +1,9 @@
 #include "music_lib.h"
 
+#include <ctype.h>
 #include <stddef.h>
 #include <stdlib.h>
+#include <string.h>
 
 song_node* table[26];
 
@@ -15,20 +17,51 @@ void set_entries(char letter, song_node* value) {
   table[tolower(letter) - 'a'] = value;
 }
 
+size_t number_of_non_empty_lists() {
+  size_t result = 0;
+
+  size_t i;
+  for (i = 0; i < 26; i++) {
+    if (table[i]) {
+      result++;
+    }
+  }
+  
+  return result;
+}
+
+song_node* nth_non_empty_list(size_t n) {
+  size_t i;
+  for (i = 0; i < 26; i++) {
+    if (table[i]) {
+      if (n == 0) {
+        return table[i];
+      }
+
+      n--;
+    }
+  }
+
+  // This should not happen, but...
+  return NULL;
+}
+
 char* make_lower(char* str) {
   // Make a copy since str may point to readonly memory
   // Please free the result of this fn.
   size_t buf_len = strlen(str) + 1;
   char* new_str = malloc(sizeof(char) * buf_len);
   size_t i;
-  strncpy(new_str, str, buf_len);
-  retur new_str;
+  for (i = 0; i < buf_len; i++) {
+    new_str[i] = tolower(str[i]);
+  }
+  return new_str;
 }
 
 song_node* get_random_song() {
   // Assumes srand was called
-  char letter = (char)(rand() % 26 + 'a');
-  song_node* entries = get_entries(letter);
+  size_t n = rand() % number_of_non_empty_lists();
+  song_node* entries = nth_non_empty_list(n);
   return random_song(entries);
 }
 
@@ -78,7 +111,10 @@ void music_lib_print_songs_of_artist(char* artist) {
   song_node* entries = get_entries(artist[0]);
   while (entries) {
     entries = search_for_artist(entries, artist);
-    print_node(entries);
+    if (entries) {
+      print_node(entries);
+      entries = entries->next;
+    }
   }
 
   free(artist);

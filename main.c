@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-#include "linked_list.h"
+#include "music_lib.h"
 
 void linked_list_tests() {
   printf("LINKED LIST TESTS\n\n");
@@ -65,7 +65,7 @@ void linked_list_tests() {
   printf("free_list:\n");
   list = free_list(list);
   printf("%p\n\n", list);
-  
+
   //songcmp
   song_node *n1 = insert_front(NULL, "C++", "Bjorne");
   song_node *n2 = insert_front(NULL, "C*", "Steel");
@@ -84,34 +84,47 @@ void linked_list_tests() {
   printf("%d\n", length(n1));
   n2->next = n3;
   printf("%d\n", length(n1));
-  
+
   free_list(n1);
 }
 
 void music_lib_tests() {
-  music_lib_add_song("mozArt", "classical Music title");
-  music_lib_add_song("taylor sWift", "blAnk space");
-  music_lib_add_song("Maroon 5", "suGar");
+  printf("MUSIC LIB TESTS\n\n");
 
-  song_node* sfs_result = music_lib_search_for_song("Mozart", "CLASSICAL MUSIC TITLE");
+  printf("Testing add_song:\n");
+  music_lib_add_song("classical Music title", "mozArt");
+  music_lib_add_song("blAnk space", "taylor sWift");
+  music_lib_add_song("suGar", "Maroon 5");
+
+  printf("Testing search_for_song:\n");
+  song_node* sfs_result = music_lib_search_for_song("CLASSICAL MUSIC TITLE", "Mozart");
   print_node(sfs_result);
 
+  printf("Testing search_for_artist:\n");
   song_node* sfa_result = music_lib_search_for_artist("mOzart");
   print_node(sfa_result);
 
+  printf("Testing print_entries_with_first_letter:\n");
   music_lib_print_entries_with_first_letter('M');
   music_lib_print_entries_with_first_letter('T');
 
+  printf("Testing print_songs_of_artist:\n");
   music_lib_print_songs_of_artist("MOZART");
   music_lib_print_songs_of_artist("TAYLOR SWIFT");
   music_lib_print_songs_of_artist("MAROON 5");
 
+  printf("Testing print_whole_library:\n");
   music_lib_print_whole_library();
 
+  printf("Testing shuffle:\n");
   music_lib_shuffle(1);
   music_lib_shuffle(1);
+
   music_lib_shuffle(2);
-  
+  music_lib_shuffle(2);
+
+  music_lib_shuffle(3);
+  music_lib_shuffle(3);
 }
 
 int main() {
@@ -119,6 +132,6 @@ int main() {
 
   linked_list_tests();
   music_lib_tests();
-  
+
   return 0;
 }
