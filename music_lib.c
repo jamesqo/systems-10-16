@@ -143,6 +143,9 @@ void music_lib_delete_song(char* name, char* artist) {
   
   song_node* entries = get_entries(artist[0]);
   set_entries(artist[0], remove_song(entries, name, artist));
+
+  free(name);
+  free(artist);
 }
 
 void music_lib_delete_whole_library() {
