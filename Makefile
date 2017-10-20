@@ -19,7 +19,7 @@ linked_list.o: linked_list.c linked_list.h
 	gcc $(CFLAGS) -c linked_list.c
 
 clean:
-	rm *.o main
+	rm -f *.o main
 
 run: all
 	./main
